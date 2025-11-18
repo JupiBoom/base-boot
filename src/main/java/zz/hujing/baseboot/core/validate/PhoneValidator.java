@@ -1,6 +1,7 @@
 package zz.hujing.baseboot.core.validate;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -10,8 +11,9 @@ import java.util.regex.Pattern;
  * @author : hujing
  * @date : 2019/10/14
  */
-@Slf4j
 public class PhoneValidator implements ConstraintValidator<Phone, String> {
+
+    private static final Logger log = LoggerFactory.getLogger(PhoneValidator.class);
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {

@@ -1,0 +1,62 @@
+# 多租户配置
+base:
+  boot:
+    tenant:
+      # 是否开启多租户
+      enabled: true
+      # 租户标识请求头
+      header: X-Tenant-Key
+      # 加密密钥
+      encrypt:
+        key: base-boot-tenant-encrypt-key-2023
+      # 数据源连接池配置
+      datasource:
+        # 连接池类型
+        type: com.zaxxer.hikari.HikariDataSource
+        # 连接池初始化大小
+        initial-size: 5
+        # 连接池最大大小
+        max-active: 20
+        # 连接池最小空闲连接数
+        min-idle: 5
+        # 连接超时时间
+        connection-timeout: 30000
+        # 空闲连接超时时间
+        idle-timeout: 600000
+        # 连接最大存活时间
+        max-lifetime: 1800000
+        # 验证连接是否有效
+        validation-query: SELECT 1
+        # 测试连接在归还到连接池之前是否有效
+        test-on-borrow: true
+        # 测试连接在空闲时是否有效
+        test-while-idle: true
+        # 定时清理空闲连接的时间间隔
+        time-between-eviction-runs-millis: 60000
+
+# 动态数据源配置
+spring:
+  datasource:
+    dynamic:
+      master:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/base_boot?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: password
+      slaver:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/base_boot_slaver?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: password
+    # 租户数据源配置（示例）
+    tenants:
+      tenant1:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/tenant1?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: password
+      tenant2:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/tenant2?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: password

@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 /**
  * 自定义分页对象
  */
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor(staticName = "of")
@@ -28,6 +27,39 @@ public class MyPage<T> implements Serializable {
     private long pageSize;
     private long total;
     private List<T> data;
+
+    // 手动添加getter和setter方法
+    public long getPageIndex() {
+        return pageIndex;
+    }
+
+    public void setPageIndex(long pageIndex) {
+        this.pageIndex = pageIndex;
+    }
+
+    public long getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(long pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
+
+    public List<T> getData() {
+        return data;
+    }
+
+    public void setData(List<T> data) {
+        this.data = data;
+    }
 
 
     public static <T, V> MyPage<T> buildResultWithFunction(IPage<V> source, MyPage<T> result, Function<V, T> convertFunc) {

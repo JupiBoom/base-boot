@@ -28,7 +28,19 @@ public class DatasourceConfig {
     @Primary
     public DynamicDataSource dynamicDataSource() {
         Map<Object, Object> targetDataSource = Maps.newHashMap();
-        dynamicDataSourceProperties.getDynamic().forEach((k, v) -> targetDataSource.put(DynamicDataSourceContext.DataSourceType.valueOf(k.trim().toUpperCase()), v.initializeDataSourceBuilder().type(v.getType()).build()));
+        
+        // 添加默认数据源（master、slaver等）
+        dynamicDataSourceProperties.getDynamic().forEach((k, v) -> 
+            targetDataSource.put(DynamicDataSourceContext.DataSourceType.valueOf(k.trim().toUpperCase()), 
+                v.initializeDataSourceBuilder().type(v.getType()).build()));
+        
+        // 添加租户数据源
+        if (dynamicDataSourceProperties.getTenants() != null) {
+            dynamicDataSourceProperties.getTenants().forEach((tenantKey, v) -> 
+                targetDataSource.put(tenantKey, 
+                    v.initializeDataSourceBuilder().type(v.getType()).build()));
+        }
+        
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
         dynamicDataSource.setTargetDataSources(targetDataSource);
         dynamicDataSource.setDefaultTargetDataSource(targetDataSource.get(DynamicDataSourceContext.DataSourceType.MASTER));
