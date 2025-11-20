@@ -33,3 +33,31 @@ base:
   boot:
     system:
       open-dynamic-data-source: true
+# Seata Configuration
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  tx-service-group: ${spring.application.name}-tx-group
+  service:
+    vgroup-mapping:
+      base-boot-tx-group: default
+    grouplist:
+      default: 127.0.0.1:8091
+  config:
+    type: file
+    file:
+      name: file.conf
+  registry:
+    type: file
+    file:
+      name: registry.conf
+# RocketMQ Configuration
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    group: base-boot-producer-group
+    retry-times-when-send-async-failed: 0
+    send-message-timeout: 300000
+    compress-message-body-threshold: 4096
+    max-message-size: 4194304
+    retry-times-when-send-failed: 2
