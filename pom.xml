@@ -23,6 +23,8 @@
         <fileupload.version>1.4</fileupload.version>
         <fastdfs-client.version>1.26.7</fastdfs-client.version>
         <spring-boot-admin.version>2.2.1</spring-boot-admin.version>
+        <influxdb.version>2.2.0</influxdb.version>
+        <rabbitmq.version>3.11.12</rabbitmq.version>
     </properties>
 
     <dependencies>
@@ -55,6 +57,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
             <optional>true</optional>
         </dependency>
 
@@ -99,9 +102,36 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- InfluxDB Client -->
+        <dependency>
+            <groupId>com.influxdb</groupId>
+            <artifactId>influxdb-client-java</artifactId>
+            <version>${influxdb.version}</version>
+        </dependency>
+
+        <!-- Spring Boot Starter AMQP (RabbitMQ) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Starter Validation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring AMQP Test -->
+        <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
