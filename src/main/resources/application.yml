@@ -20,6 +20,22 @@ spring:
     host: localhost
     password: bdth-redis@2019
     port: 16379
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    listener:
+      simple:
+        concurrency: 5
+        max-concurrency: 10
+        prefetch: 1
+influxdb:
+  url: http://localhost:8086
+  token: my-token
+  org: my-org
+  bucket: my-bucket
 management:
   endpoints:
     web:
