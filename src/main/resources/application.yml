@@ -20,6 +20,52 @@ spring:
     host: localhost
     password: bdth-redis@2019
     port: 16379
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    listener:
+      simple:
+        concurrency: 5
+        max-concurrency: 10
+        prefetch: 100
+  cloud:
+    config:
+      uri: http://localhost:8888
+      name: base-boot
+      profile: ${spring.profiles.active:dev}
+      label: master
+    bus:
+      enabled: true
+      trace:
+        enabled: true
+
+# InfluxDB配置
+influxdb:
+  url: http://localhost:8086
+  username: admin
+  password: admin
+  database: iot_data
+
+# MQTT Configuration
+mqtt:
+  broker: tcp://localhost:1883
+  clientId: iot-data-collector
+  username: 
+  password: 
+  topic: device/#
+  qos: 1
+  keepAliveInterval: 60
+
+# Device Configuration
+device:
+  offlineThreshold: 300000 # 5分钟，单位毫秒
+
+
+
+# Actuator Configuration
 management:
   endpoints:
     web:
