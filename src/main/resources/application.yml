@@ -20,6 +20,25 @@ spring:
     host: localhost
     password: bdth-redis@2019
     port: 16379
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  mail:
+    host: smtp.example.com
+    port: 587
+    username: inventory-alert@example.com
+    password: password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 management:
   endpoints:
     web:
