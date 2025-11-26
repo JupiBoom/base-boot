@@ -33,3 +33,16 @@ base:
   boot:
     system:
       open-dynamic-data-source: true
+
+influxdb:
+  url: http://localhost:8086
+  username: admin
+  password: admin
+  database: iot_data
+
+mqtt:
+  broker-url: tcp://localhost:1883
+  username:
+  password:
+  client-id: iot-data-collector
+  topic: iot/device/data
